@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 /**
- * @author Nagesh 
- * This class is responsible to handle User information.
+ * @author Nagesh This class is responsible to handle User information.
  **/
 @Entity
 public class Employee {
@@ -16,10 +19,15 @@ public class Employee {
 	@GeneratedValue
 	private Integer id;
 
+	@Size(min=3, message="First name cannot be less then 3 characters.")
 	private String firstName;
+	@Size(min=3, message="Last name cannot be less then 3 characters.")
 	private String lastName;
+	@Size(min=4, max =6, message="Gender cannot be less then 4 and more then 6 characters." )
 	private String gender;
+	@Past(message = "Date of birth,should be in past.")
 	private Date dateOfBirth;
+	@NotEmpty(message="department cannot be empty.")
 	private String department;
 
 	public Employee() {
@@ -87,6 +95,5 @@ public class Employee {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
 
 }

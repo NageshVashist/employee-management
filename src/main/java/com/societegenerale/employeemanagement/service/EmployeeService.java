@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.societegenerale.employeemanagement.bean.Employee;
 import com.societegenerale.employeemanagement.repository.EmployeeRepository;
+import com.societegenerale.exception.EmployeeNotFoundException;
 
 @Service
 public class EmployeeService {
@@ -21,12 +22,11 @@ public class EmployeeService {
 
 	public Employee getEmployee(int id) {
 		Optional<Employee> optional = repo.findById(id);
-		Employee emp = null;
 		if (optional.isPresent()) {
 			return optional.get();
+		} else {
+			throw new EmployeeNotFoundException("Employee with id-" + id + " not found.");
 		}
-
-		return emp;
 
 	}
 
@@ -41,9 +41,9 @@ public class EmployeeService {
 			Employee emp1 = optional.get();
 			emp1 = emp;
 			return repo.save(emp1);
+		} else {
+			throw new EmployeeNotFoundException("Employee with id-" + id + " not found.");
 		}
-
-		return null;
 
 	}
 
@@ -51,8 +51,9 @@ public class EmployeeService {
 		Optional<Employee> optional = repo.findById(id);
 		if (optional.isPresent()) {
 			repo.delete(optional.get());
+		} else {
+			throw new EmployeeNotFoundException("Employee with id-" + id + " not found.");
 		}
-
 	}
 
 }
