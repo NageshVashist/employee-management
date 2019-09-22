@@ -19,15 +19,15 @@ public class Employee {
 	@GeneratedValue
 	private Integer id;
 
-	@Size(min=3, message="First name cannot be less then 3 characters.")
+	@Size(min = 3, message = "First name cannot be less then 3 characters.")
 	private String firstName;
-	@Size(min=3, message="Last name cannot be less then 3 characters.")
+	@Size(min = 3, message = "Last name cannot be less then 3 characters.")
 	private String lastName;
-	@Size(min=4, max =6, message="Gender cannot be less then 4 and more then 6 characters." )
+	@Size(min = 4, max = 6, message = "Gender cannot be less then 4 and more then 6 characters.")
 	private String gender;
 	@Past(message = "Date of birth,should be in past.")
 	private Date dateOfBirth;
-	@NotEmpty(message="department cannot be empty.")
+	@NotEmpty(message = "department cannot be empty.")
 	private String department;
 
 	public Employee() {
@@ -40,7 +40,8 @@ public class Employee {
 	 * @param dateOfBirth: Date of birth of the user.
 	 * @param department: Department of the user.
 	 */
-	public Employee(String firstName, String lastName, String gender, Date dateOfBirth, String department) {
+	public Employee(int id, String firstName, String lastName, String gender, Date dateOfBirth, String department) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
