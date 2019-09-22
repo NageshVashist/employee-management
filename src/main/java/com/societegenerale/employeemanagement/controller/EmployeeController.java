@@ -5,6 +5,8 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,29 +39,29 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public Employee saveEmployee(@RequestBody Employee emp) {
+	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee emp) {
+		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.saveEmployee(emp),
+				HttpStatus.CREATED);
 
-		return empService.saveEmployee(emp);
-	}
-
-	public EmployeeService getEmpService() {
-		return empService;
-	}
-
-	public void setEmpService(EmployeeService empService) {
-		this.empService = empService;
+		return empRes;
 	}
 
 	@PutMapping("/employees/{id}")
-	public Employee updateEmployee(@RequestBody Employee emp, @PathVariable int id) {
+	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee emp, @PathVariable int id) {
 
-		return empService.updateeEmployee(emp, id);
+		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.updateeEmployee(emp, id),
+				HttpStatus.CREATED);
+
+		return empRes;
 	}
 
 	@DeleteMapping("/employees/{id}")
-	public void deleteEmployee(@PathVariable int id) {
+	public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
+		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.removeEmployee(id),
+				HttpStatus.MOVED_PERMANENTLY);
 
-		empService.removeEmployee(id);
+		return empRes;
+
 	}
 
 }

@@ -47,10 +47,11 @@ public class EmployeeService {
 
 	}
 
-	public void removeEmployee(int id) {
+	public Employee removeEmployee(int id) {
 		Optional<Employee> optional = repo.findById(id);
 		if (optional.isPresent()) {
 			repo.delete(optional.get());
+			return optional.get();
 		} else {
 			throw new EmployeeNotFoundException("Employee with id-" + id + " not found.");
 		}
