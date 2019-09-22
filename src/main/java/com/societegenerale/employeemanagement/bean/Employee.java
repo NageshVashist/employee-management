@@ -2,10 +2,19 @@ package com.societegenerale.employeemanagement.bean;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
- * @author Nagesh This class is responsible to handle User information.
+ * @author Nagesh 
+ * This class is responsible to handle User information.
  **/
+@Entity
 public class Employee {
+	@Id
+	@GeneratedValue
+	private Integer id;
 
 	private String firstName;
 	private String lastName;
@@ -70,5 +79,14 @@ public class Employee {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 
 }
