@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -29,6 +28,8 @@ public class Employee {
 	private Date dateOfBirth;
 	@NotEmpty(message = "department cannot be empty.")
 	private String department;
+	@NotEmpty(message = "image cannot be empty.")
+	private String imagePath;
 
 	public Employee() {
 	}
@@ -40,13 +41,15 @@ public class Employee {
 	 * @param dateOfBirth: Date of birth of the user.
 	 * @param department: Department of the user.
 	 */
-	public Employee(int id, String firstName, String lastName, String gender, Date dateOfBirth, String department) {
+	public Employee(int id, String firstName, String lastName, String gender, Date dateOfBirth, String department,
+			String image) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.department = department;
+		this.imagePath = image;
 	}
 
 	public String getFirstName() {
@@ -95,6 +98,14 @@ public class Employee {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 }

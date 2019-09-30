@@ -34,10 +34,14 @@ public class EmployeeManagementApplicationTests {
 	private EmployeeService empService;
 	List<Employee> empList = new ArrayList<>();
 	{
-		empList.add(new Employee(1, "Test_1", "Employee", "Male", new Date(), "Lead"));
-		empList.add(new Employee(2, "Test_2", "Employee", "Male", new Date(), "Manager"));
-		empList.add(new Employee(3, "Test_3", "Employee", "Female", new Date(), "Engineer"));
-		empList.add(new Employee(4, "Test_4", "Employee", "Male", new Date(), "Engineer"));
+		empList.add(new Employee(1, "Test_1", "Employee", "Male", new Date(), "Lead",
+				"http://res.publicdomainfiles.com/pdf_view/68/13927384215784.png"));
+		empList.add(new Employee(2, "Test_2", "Employee", "Male", new Date(), "Manager",
+				"http://res.publicdomainfiles.com/pdf_view/68/13927384215784.png"));
+		empList.add(new Employee(3, "Test_3", "Employee", "Female", new Date(), "Engineer",
+				"https://publicdomainvectors.org/photos/female-user-icon.png"));
+		empList.add(new Employee(4, "Test_4", "Employee", "Male", new Date(), "Engineer",
+				"http://res.publicdomainfiles.com/pdf_view/68/13927384215784.png"));
 	}
 
 	@Test
@@ -76,7 +80,8 @@ public class EmployeeManagementApplicationTests {
 		String input = "{\n" + "    \"id\": 5,\n" + "    \"firstName\": \"New_Test\",\n"
 				+ "    \"lastName\": \"Employee\",\n" + "    \"gender\": \"Female\",\n"
 				+ "    \"dateOfBirth\": \"1985-04-10\",\n" + "    \"department\": \"Intern\"\n" + "}";
-		Employee emp = new Employee(5, "New_Test", "Employee", "Female", new Date(), "Intern");
+		Employee emp = new Employee(5, "New_Test", "Employee", "Female", new Date(), "Intern",
+				"https://publicdomainvectors.org/photos/female-user-icon.png");
 		ResultMatcher created = MockMvcResultMatchers.status().isCreated();
 		when(empService.saveEmployee(emp)).thenReturn(emp);
 		mvc.perform(MockMvcRequestBuilders.post("/employees").contentType(MediaType.APPLICATION_JSON).content(input))
@@ -89,7 +94,8 @@ public class EmployeeManagementApplicationTests {
 		String input = "{\n" + "    \"id\": 5,\n" + "    \"firstName\": \"New_Test\",\n"
 				+ "    \"lastName\": \"Employee\",\n" + "    \"gender\": \"Male\",\n"
 				+ "    \"dateOfBirth\": \"1985-04-10\",\n" + "    \"department\": \"Intern\"\n" + "}";
-		Employee emp = new Employee(5, "New_Test", "Employee", "Male", new Date(), "Intern");
+		Employee emp = new Employee(5, "New_Test", "Employee", "Male", new Date(), "Intern",
+				"http://res.publicdomainfiles.com/pdf_view/68/13927384215784.png");
 		ResultMatcher created = MockMvcResultMatchers.status().isCreated();
 		when(empService.updateeEmployee(emp, 5)).thenReturn(emp);
 		mvc.perform(
@@ -101,7 +107,8 @@ public class EmployeeManagementApplicationTests {
 	@Test
 	public void removeEmployee() throws Exception {
 		String output = "{ id :2, firstName : Test_2 , lastName : Employee , gender : Male , dateOfBirth : 2019-09-22 , department : Manager }";
-		Employee emp = new Employee(2, "Test_2", "Employee", "Male", new Date(), "Manager");
+		Employee emp = new Employee(2, "Test_2", "Employee", "Male", new Date(), "Manager",
+				"http://res.publicdomainfiles.com/pdf_view/68/13927384215784.png");
 		ResultMatcher moved = MockMvcResultMatchers.status().isMovedPermanently();
 		when(empService.removeEmployee(2)).thenReturn(emp);
 		mvc.perform(MockMvcRequestBuilders.delete("/employees/{id}", 5).contentType(MediaType.APPLICATION_JSON)

@@ -16,7 +16,7 @@ public class EmployeeService {
 	private EmployeeRepository repo;
 
 	public List<Employee> getEmployees() {
-		return repo.findAll();
+		return repo.findAllByOrderByFirstNameDesc();
 
 	}
 

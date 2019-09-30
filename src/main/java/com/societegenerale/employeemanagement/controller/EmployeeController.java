@@ -2,11 +2,8 @@ package com.societegenerale.employeemanagement.controller;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +18,7 @@ import com.societegenerale.employeemanagement.service.EmployeeService;
 /**
  * Employee controller is responsible for handling employee rest calls
  **/
+@CrossOrigin()
 @RestController
 public class EmployeeController {
 	@Autowired
@@ -39,28 +37,21 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/employees")
-	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee emp) {
-		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.saveEmployee(emp),
-				HttpStatus.CREATED);
-
-		return empRes;
+	
+	public Employee saveEmployee(@RequestBody Employee emp) {
+		return empService.saveEmployee(emp);
 	}
 
 	@PutMapping("/employees/{id}")
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee emp, @PathVariable int id) {
+	public Employee updateEmployee(@RequestBody Employee emp, @PathVariable int id) {
 
-		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.updateeEmployee(emp, id),
-				HttpStatus.CREATED);
+		return empService.updateeEmployee(emp, id);
 
-		return empRes;
 	}
 
 	@DeleteMapping("/employees/{id}")
-	public ResponseEntity<Employee> deleteEmployee(@PathVariable int id) {
-		ResponseEntity<Employee> empRes = new ResponseEntity<Employee>(empService.removeEmployee(id),
-				HttpStatus.MOVED_PERMANENTLY);
-
-		return empRes;
+	public Employee deleteEmployee(@PathVariable int id) {
+		return empService.removeEmployee(id);
 
 	}
 
